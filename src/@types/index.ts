@@ -18,7 +18,7 @@ export interface APIRepo {
     login: string;
   }
   stargazers_count: number;
-  forks: number;
+  forks_count: number;
   html_url: string;
   language?: string;
   description?: string;

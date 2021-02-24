@@ -8,8 +8,6 @@ import {
   RightSide,
   Repos,
   ErrorWrapper,
-  Spinner,
-  SpinnerWrapper,
   StarIcon,
   Tab,
 } from "./styles";
@@ -17,6 +15,7 @@ import {
 import ProfileData from "../../components/ProfileData";
 import RepoCard from "../../components/RepoCard";
 import { APIRepo, APIUser } from "../../@types";
+import Spinner from "../../components/Spinner";
 
 interface Data {
   user?: APIUser;
@@ -60,10 +59,7 @@ const Home: React.FC = () => {
 
   if (!data?.user || !data?.repos || loading) {
     return (
-      <SpinnerWrapper>
-        <Spinner />
-        <span>Loading ...</span>
-      </SpinnerWrapper>
+      <Spinner />
     );
   }
 
@@ -100,10 +96,6 @@ const Home: React.FC = () => {
             blog={data.user.blog}
             bio={data.user.bio}
           />
-          <img
-            src={`https://maps.googleapis.com/maps/api/staticmap?center=Brooklyn+Bridge,New+York,NY&zoom=13&size=600x300&maptype=roadmap&markers=color:blue%7Clabel:S%7C40.702147,-74.015794&markers=color:green%7Clabel:G%7C40.711614,-74.012318&markers=color:red%7Clabel:C%7C40.718217,-73.998284&key=AIzaSyA3kg7YWugGl1lTXmAmaBGPNhDW9pEh5bo&signature=GJnbP6sQrFY1ce8IsvG2WR2P0Jw=`}
-            alt=""
-          />
         </LeftSide>
 
         <RightSide>
@@ -122,7 +114,7 @@ const Home: React.FC = () => {
                   description={item.description}
                   language={item.language}
                   stars={item.stargazers_count}
-                  forks={item.forks}
+                  forks={item.forks_count}
                 />
               ))}
             </div>

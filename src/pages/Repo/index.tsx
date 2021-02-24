@@ -1,5 +1,5 @@
-import React from "react";
-import {Link} from 'react-router-dom';
+import React, { useEffect, useState } from "react";
+import { Link, useParams } from "react-router-dom";
 import {
   Container,
   BreadCrumb,
@@ -9,40 +9,81 @@ import {
   ForkIcon,
   GithubIcon,
   LinkButton,
+  ErrorWrapper,
 } from "./styles";
 
+import { APIRepo } from "../../@types";
+import Spinner from "../../components/Spinner";
+
+interface Data {
+  repo?: APIRepo;
+  error?: string;
+}
+
 const Repo: React.FC = () => {
+  const { username, reponame } = useParams();
+  const [data, setData] = useState<Data>();
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    setLoading(true);
+    
+    fetch(`https://api.github.com/repos/${username}/${reponame}`).then(
+      async (response) => {
+        if (response.status === 404) {
+          setData({ error: "Repo not found!" });
+          return;
+        }
+
+        const repo = await response.json();
+
+        setData({ repo });
+        setLoading(false);
+      }
+    );
+  }, [reponame]);
+
+  if (data?.error) {
+    return <ErrorWrapper>{data.error}</ErrorWrapper>;
+  }
+
+  if (!data?.repo || loading) {
+    return (
+      <Spinner />
+    );
+  }
+
   return (
     <Container>
       <BreadCrumb>
         <RepoIcon />
-        <Link className={"username"} to={"/nanatkim"}>
-          nanatkim
+        <Link className={username} to={"/" + username}>
+          {username}
         </Link>
 
         <span>/</span>
 
-        <Link className={"reponame"} to={"/nanatkim/git-profile"}>
-          git-profile
+        <Link className={reponame} to={`/${username}/${reponame}`}>
+          {reponame}
         </Link>
       </BreadCrumb>
 
-      <p>contains git profile code</p>
+      <p>{data?.repo?.description}</p>
 
       <Stats>
         <li>
           <StarIcon />
-          <b>9</b>
+          <b>{data?.repo?.stargazers_count}</b>
           <span>stars</span>
         </li>
         <li>
           <ForkIcon />
-          <b>0</b>
+          <b>{data?.repo?.forks_count}</b>
           <span>forks</span>
         </li>
       </Stats>
 
-      <LinkButton href={"https://github.com/nanatkim/git-profile"}>
+      <LinkButton href={data?.repo?.html_url}>
         <GithubIcon />
         <span>view on github</span>
       </LinkButton>
