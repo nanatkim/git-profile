@@ -8,6 +8,7 @@ export interface APIUser {
   company?: string;
   email?: string;
   location?: string;
+  bio?: string;
 }
 
 export interface APIRepo {

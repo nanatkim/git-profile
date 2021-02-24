@@ -10,6 +10,8 @@ import {
   ErrorWrapper,
   Spinner,
   SpinnerWrapper,
+  StarIcon,
+  Tab,
 } from "./styles";
 
 import ProfileData from "../../components/ProfileData";
@@ -25,8 +27,11 @@ interface Data {
 const Home: React.FC = () => {
   const { username = "nanatkim" } = useParams();
   const [data, setData] = useState<Data>();
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
+    setLoading(true);
+
     Promise.all([
       fetch(`https://api.github.com/users/${username}`),
       fetch(`https://api.github.com/users/${username}/starred`),
@@ -45,6 +50,7 @@ const Home: React.FC = () => {
         user,
         repos,
       });
+      setLoading(false);
     });
   }, [username]);
 
@@ -52,8 +58,8 @@ const Home: React.FC = () => {
     return <ErrorWrapper>{data.error}</ErrorWrapper>;
   }
 
-  if (!data?.user || !data?.repos) {
-    return(
+  if (!data?.user || !data?.repos || loading) {
+    return (
       <SpinnerWrapper>
         <Spinner />
         <span>Loading ...</span>
@@ -61,8 +67,25 @@ const Home: React.FC = () => {
     );
   }
 
+  const TabContent = () => (
+    <div className="content">
+      <StarIcon />
+      <span className="label">Starred</span>
+      <span className="number">{data.repos?.length}</span>
+    </div>
+  );
+
   return (
     <Container>
+      <Tab className="desktop">
+        <div className="wrapper">
+          <span className="offset" />
+          <TabContent />
+        </div>
+
+        <span className="line" />
+      </Tab>
+
       <Main>
         <LeftSide>
           <ProfileData
@@ -75,12 +98,21 @@ const Home: React.FC = () => {
             location={data.user.location}
             email={data.user.email}
             blog={data.user.blog}
+            bio={data.user.bio}
+          />
+          <img
+            src={`https://maps.googleapis.com/maps/api/staticmap?center=Brooklyn+Bridge,New+York,NY&zoom=13&size=600x300&maptype=roadmap&markers=color:blue%7Clabel:S%7C40.702147,-74.015794&markers=color:green%7Clabel:G%7C40.711614,-74.012318&markers=color:red%7Clabel:C%7C40.718217,-73.998284&key=AIzaSyA3kg7YWugGl1lTXmAmaBGPNhDW9pEh5bo&signature=GJnbP6sQrFY1ce8IsvG2WR2P0Jw=`}
+            alt=""
           />
         </LeftSide>
 
         <RightSide>
+          <Tab className="mobile">
+            <TabContent />
+            <span className="line" />
+          </Tab>
+
           <Repos>
-            <h2>Starred repos</h2>
             <div>
               {data.repos.map((item) => (
                 <RepoCard

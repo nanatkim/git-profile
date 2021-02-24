@@ -27,6 +27,7 @@ export const Flex = styled.div`
       font-size: 20px;
       color: var(--username);
       font-weight: 300;
+      margin-bottom: 16px;
     }
   }
 
@@ -47,6 +48,7 @@ export const Avatar = styled.img`
 
   @media (min-width: 768px) {
     width: 100%;
+    margin-top: -34px;
   }
 `;
 

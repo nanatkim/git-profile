@@ -23,6 +23,7 @@ interface User {
   location?: string;
   email?: string;
   blog?: string;
+  bio?: string;
 }
 
 const ProfileData: React.FC<User> = ({
@@ -35,6 +36,7 @@ const ProfileData: React.FC<User> = ({
   location,
   email,
   blog,
+  bio,
 }) => {
   return (
     <Container>
@@ -46,6 +48,10 @@ const ProfileData: React.FC<User> = ({
           <h2>{username}</h2>
         </div>
       </Flex>
+
+      <Column>
+        <li>{bio}</li>
+      </Column>
 
       <Row>
         <li>
