@@ -38,7 +38,6 @@ export default createGlobalStyle`
     --icon: #6a737d;
     --link: #0366d6;
     --border: #e1e4e8;
-    --ticker: rgba(209,213,218, .5);
 
     --javascript: #f1e05a;
     --typescript: #2b7489;

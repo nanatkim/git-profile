@@ -73,10 +73,7 @@ export const BotSide = styled.div`
     height: 12px;
     border-radius: 50%;
     flex-shrink: 0;
-
-    &.other {
-      background: var(--other-language);
-    }
+    background: var(--other-language);
 
     &.javascript {
       background: var(--javascript);

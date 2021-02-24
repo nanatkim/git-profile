@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 
 export const Container = styled.div`
   --horizontalPadding: 16px;
@@ -56,4 +56,49 @@ export const Repos = styled.div`
       grid-auto-rows: minmax(min-content, max-content);
     }
   }
+`;
+
+export const ErrorWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  background: #f9826c;
+  padding: 20px;
+  margin: 10rem;
+  border-radius: 5px;
+  color: #fff;
+  font-weight: bold;
+`;
+
+export const SpinnerWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 10rem;
+
+  > span {
+    margin-top: 10px;
+  }
+`;
+
+const rotate360 = keyframes`
+from {
+  transform: rotate(0deg);
+}
+to {
+  transform: rotate(360deg);
+}
+`;
+
+export const Spinner = styled.div`
+  animation: ${rotate360} 1s linear infinite;
+  transform: translateZ(0);
+
+  border-top: 2px solid var(--gray);
+  border-right: 2px solid var(--gray);
+  border-bottom: 2px solid var(--gray);
+  border-left: 4px solid var(--black);
+  background: transparent;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
 `;

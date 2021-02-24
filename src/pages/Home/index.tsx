@@ -1,7 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
-import { Container, Main, LeftSide, RightSide, Repos } from "./styles";
+import {
+  Container,
+  Main,
+  LeftSide,
+  RightSide,
+  Repos,
+  ErrorWrapper,
+  Spinner,
+  SpinnerWrapper,
+} from "./styles";
 
 import ProfileData from "../../components/ProfileData";
 import RepoCard from "../../components/RepoCard";
@@ -40,11 +49,16 @@ const Home: React.FC = () => {
   }, [username]);
 
   if (data?.error) {
-    return <h1>{data.error}</h1>;
+    return <ErrorWrapper>{data.error}</ErrorWrapper>;
   }
 
   if (!data?.user || !data?.repos) {
-    return <h1>loading</h1>
+    return(
+      <SpinnerWrapper>
+        <Spinner />
+        <span>Loading ...</span>
+      </SpinnerWrapper>
+    );
   }
 
   return (

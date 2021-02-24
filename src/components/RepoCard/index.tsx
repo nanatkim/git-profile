@@ -26,7 +26,7 @@ const RepoCard: React.FC<User> = ({
   stars,
   forks,
 }) => {
-  const languageClass = language ? language.toLocaleLowerCase() : "other";
+  const languageClass = language ? language.toLowerCase() : "other";
   return (
     <Container>
       <TopSide>
