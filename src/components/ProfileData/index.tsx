@@ -73,12 +73,6 @@ const ProfileData: React.FC<User> = ({
             <span>{company}</span>
           </li>
         )}
-        {location && (
-          <li>
-            <LocationIcon />
-            <span>{location}</span>
-          </li>
-        )}
         {email && (
           <li>
             <EmailIcon />
@@ -89,6 +83,12 @@ const ProfileData: React.FC<User> = ({
           <li>
             <BlogIcon />
             <span>{blog}</span>
+          </li>
+        )}
+        {location && (
+          <li>
+            <LocationIcon />
+            <span>{location}</span>
           </li>
         )}
       </Column>

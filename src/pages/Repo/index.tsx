@@ -27,7 +27,7 @@ const Repo: React.FC = () => {
 
   useEffect(() => {
     setLoading(true);
-    
+
     fetch(`https://api.github.com/repos/${username}/${reponame}`).then(
       async (response) => {
         if (response.status === 404) {
@@ -41,16 +41,14 @@ const Repo: React.FC = () => {
         setLoading(false);
       }
     );
-  }, [reponame]);
+  }, [reponame, username]);
 
   if (data?.error) {
     return <ErrorWrapper>{data.error}</ErrorWrapper>;
   }
 
   if (!data?.repo || loading) {
-    return (
-      <Spinner />
-    );
+    return <Spinner />;
   }
 
   return (

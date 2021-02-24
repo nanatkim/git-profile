@@ -7,15 +7,16 @@ import {
   LeftSide,
   RightSide,
   Repos,
-  ErrorWrapper,
   StarIcon,
   Tab,
+  ErrorWrapper,
 } from "./styles";
 
 import ProfileData from "../../components/ProfileData";
 import RepoCard from "../../components/RepoCard";
 import { APIRepo, APIUser } from "../../@types";
 import Spinner from "../../components/Spinner";
+import Map from "../../components/Map";
 
 interface Data {
   user?: APIUser;
@@ -51,6 +52,17 @@ const Home: React.FC = () => {
       });
       setLoading(false);
     });
+    // setData({
+    //   user: {
+    //     login: "nanatkim",
+    //     name: "natsu",
+    //     followers: 1,
+    //     following: 2,
+    //     avatar_url: "https://github.com/nanatkim.png",
+    //     location: "são paulo",
+    //   },
+    //   repos: [],
+    // });
   }, [username]);
 
   if (data?.error) {
@@ -58,9 +70,7 @@ const Home: React.FC = () => {
   }
 
   if (!data?.user || !data?.repos || loading) {
-    return (
-      <Spinner />
-    );
+    return <Spinner />;
   }
 
   const TabContent = () => (
@@ -96,6 +106,7 @@ const Home: React.FC = () => {
             blog={data.user.blog}
             bio={data.user.bio}
           />
+          {data.user.location && <Map location={data.user.location} />}
         </LeftSide>
 
         <RightSide>
