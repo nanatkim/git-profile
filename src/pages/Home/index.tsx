@@ -12,6 +12,8 @@ import {
   ErrorWrapper,
 } from "./styles";
 
+import api from "../../services/api";
+
 import ProfileData from "../../components/ProfileData";
 import RepoCard from "../../components/RepoCard";
 import { APIRepo, APIUser } from "../../@types";
@@ -32,26 +34,29 @@ const Home: React.FC = () => {
   useEffect(() => {
     setLoading(true);
 
-    Promise.all([
-      fetch(`https://api.github.com/users/${username}`),
-      fetch(`https://api.github.com/users/${username}/starred`),
-    ]).then(async (responses) => {
-      const [userResponse, reposResponse] = responses;
+    try {
+      Promise.all([
+        api.get<APIUser>(`users/${username}`),
+        api.get<APIRepo[]>(`users/${username}/starred`),
+      ]).then(async (responses) => {
+        const [userResponse, reposResponse] = responses;
 
-      if (userResponse.status === 404) {
-        setData({ error: "User not found!" });
-        return;
-      }
+        if (userResponse.status === 404) {
+          setData({ error: "User not found!" });
+          return;
+        }
 
-      const user = await userResponse.json();
-      const repos = await reposResponse.json();
+        setData({
+          user: userResponse.data,
+          repos: reposResponse.data,
+        });
 
-      setData({
-        user,
-        repos,
+        setLoading(false);
       });
+    } catch (error) {
+      setData({ error });
       setLoading(false);
-    });
+    }
   }, [username]);
 
   if (data?.error) {

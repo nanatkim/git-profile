@@ -12,6 +12,8 @@ import {
   ErrorWrapper,
 } from "./styles";
 
+import api from "../../services/api";
+
 import { APIRepo } from "../../@types";
 import Spinner from "../../components/Spinner";
 
@@ -28,19 +30,22 @@ const Repo: React.FC = () => {
   useEffect(() => {
     setLoading(true);
 
-    fetch(`https://api.github.com/repos/${username}/${reponame}`).then(
-      async (response) => {
-        if (response.status === 404) {
-          setData({ error: "Repo not found!" });
-          return;
-        }
+    try {
+      api
+        .get<APIRepo>(`repos/${username}/${reponame}`)
+        .then(async (response) => {
+          if (response.status === 404) {
+            setData({ error: "Repo not found!" });
+            return;
+          }
 
-        const repo = await response.json();
-
-        setData({ repo });
-        setLoading(false);
-      }
-    );
+          setData({ repo: response.data });
+          setLoading(false);
+        });
+    } catch (error) {
+      setData({ error });
+      setLoading(false);
+    }
   }, [reponame, username]);
 
   if (data?.error) {

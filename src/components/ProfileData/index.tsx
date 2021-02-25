@@ -74,9 +74,7 @@ const ProfileData: React.FC<User> = ({
         {url && (
           <li>
             <UrlIcon />
-            <Url href={url}>
-              <span>{url}</span>
-            </Url>
+            <Url href={url}>{url}</Url>
           </li>
         )}
         {company && (
@@ -94,9 +92,7 @@ const ProfileData: React.FC<User> = ({
         {blog && (
           <li>
             <BlogIcon />
-            <Url href={blog}>
-              <span>{blog}</span>
-            </Url>
+            <Url href={blog}>{blog}</Url>
           </li>
         )}
         {location && (

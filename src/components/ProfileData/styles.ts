@@ -122,6 +122,10 @@ export const BlogIcon = styled(RiLinksLine)`
 export const Url = styled.a`
   color: var(--link);
   text-decoration: none;
+  margin-left: 5px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 
   &:hover,
   &:focus {
