@@ -11,6 +11,8 @@ import {
   LocationIcon,
   EmailIcon,
   BlogIcon,
+  Url,
+  UrlIcon,
 } from "./styles";
 
 interface User {
@@ -19,6 +21,7 @@ interface User {
   avatarUrl: string;
   followers: number;
   following: number;
+  url: string;
   company?: string;
   location?: string;
   email?: string;
@@ -32,6 +35,7 @@ const ProfileData: React.FC<User> = ({
   avatarUrl,
   followers,
   following,
+  url,
   company,
   location,
   email,
@@ -67,6 +71,14 @@ const ProfileData: React.FC<User> = ({
       </Row>
 
       <Column>
+        {url && (
+          <li>
+            <UrlIcon />
+            <Url href={url}>
+              <span>{url}</span>
+            </Url>
+          </li>
+        )}
         {company && (
           <li>
             <CompanyIcon />
@@ -82,7 +94,9 @@ const ProfileData: React.FC<User> = ({
         {blog && (
           <li>
             <BlogIcon />
-            <span>{blog}</span>
+            <Url href={blog}>
+              <span>{blog}</span>
+            </Url>
           </li>
         )}
         {location && (

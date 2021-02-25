@@ -19,7 +19,7 @@ const Header: React.FC = () => {
       <SearchForm onSubmit={handleSubmit}>
         <input
           type="text"
-          placeholder="Enter username or repo..."
+          placeholder="Enter username or username/repo..."
           value={search}
           onChange={(e) => setSearch(e.currentTarget.value)}
         />

@@ -52,17 +52,6 @@ const Home: React.FC = () => {
       });
       setLoading(false);
     });
-    // setData({
-    //   user: {
-    //     login: "nanatkim",
-    //     name: "natsu",
-    //     followers: 1,
-    //     following: 2,
-    //     avatar_url: "https://github.com/nanatkim.png",
-    //     location: "são paulo",
-    //   },
-    //   repos: [],
-    // });
   }, [username]);
 
   if (data?.error) {
@@ -100,6 +89,7 @@ const Home: React.FC = () => {
             avatarUrl={data.user.avatar_url}
             followers={data.user.followers}
             following={data.user.following}
+            url={data.user.html_url}
             company={data.user.company}
             location={data.user.location}
             email={data.user.email}

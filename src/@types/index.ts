@@ -4,6 +4,7 @@ export interface APIUser {
   followers: number;
   following: number;
   avatar_url: string;
+  html_url: string;
   blog?: string;
   company?: string;
   email?: string;
@@ -16,7 +17,7 @@ export interface APIRepo {
   name: string;
   owner: {
     login: string;
-  }
+  };
   stargazers_count: number;
   forks_count: number;
   html_url: string;
