@@ -15,6 +15,16 @@ export const GithubLogo = styled(FaGithub)`
   flex-shrink: 0;
 `;
 
+export const Title = styled.h1`
+  font-size: 16px;
+  margin-left: 10px;
+
+  > a {
+    color: var(--primary);
+    text-decoration: none;
+  }
+`;
+
 export const SearchForm = styled.form`
   padding-left: 16px;
   width: 100%;

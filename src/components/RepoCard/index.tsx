@@ -9,7 +9,7 @@ import {
   ForkIcon,
 } from "./styles";
 
-interface User {
+interface Repo {
   username: string;
   reponame: string;
   description?: string;
@@ -18,7 +18,7 @@ interface User {
   forks: number;
 }
 
-const RepoCard: React.FC<User> = ({
+const RepoCard: React.FC<Repo> = ({
   username,
   reponame,
   description,

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
-import { Container, GithubLogo, SearchForm } from "./styles";
+import { Container, GithubLogo, Title, SearchForm } from "./styles";
 
 const Header: React.FC = () => {
   const [search, setSearch] = useState("");
@@ -16,6 +16,9 @@ const Header: React.FC = () => {
   return (
     <Container>
       <GithubLogo />
+      <Title>
+        <Link to={"/"}>Git Profile</Link>
+      </Title>
       <SearchForm onSubmit={handleSubmit}>
         <input
           type="text"
