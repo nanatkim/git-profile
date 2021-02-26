@@ -7,7 +7,7 @@ export const Container = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: center;
-  margin-top: 20px;
+  margin: 20px;
 `;
 
 export const Card = styled.div`
@@ -18,7 +18,11 @@ export const Card = styled.div`
   border-radius: 6px;
 
   > p {
-    font-size: 16px;
+    font-size: 12px;
+
+    @media (min-width: 768px) {
+      font-size: 16px;
+    }
   }
 `;
 
@@ -30,7 +34,7 @@ export const BreadCrumb = styled.div`
   flex-wrap: nowrap;
   white-space: nowrap;
 
-  font-size: 18px;
+  font-size: 15px;
 
   > a {
     color: var(--link);
@@ -52,6 +56,10 @@ export const BreadCrumb = styled.div`
 
   > span {
     padding: 0 5px;
+  }
+
+  @media (min-width: 768px) {
+    font-size: 18px;
   }
 `;
 
@@ -79,6 +87,11 @@ export const Stats = styled.ul`
     > * {
       margin-right: 7px;
       color: var(--gray);
+      font-size: 12px;
+
+      @media (min-width: 768px) {
+        font-size: 16px;
+      }
     }
   }
 `;
