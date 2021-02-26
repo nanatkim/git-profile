@@ -5,8 +5,17 @@ import { FaGithub } from "react-icons/fa";
 
 export const Container = styled.div`
   display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin-top: 20px;
+`;
+
+export const Card = styled.div`
+  display: flex;
   flex-direction: column;
   padding: 16px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
 
   > p {
     font-size: 16px;

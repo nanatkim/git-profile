@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import {
   Container,
+  Card,
   BreadCrumb,
   RepoIcon,
   Stats,
@@ -58,38 +59,40 @@ const Repo: React.FC = () => {
 
   return (
     <Container>
-      <BreadCrumb>
-        <RepoIcon />
-        <Link className={username} to={"/" + username}>
-          {username}
-        </Link>
+      <Card>
+        <BreadCrumb>
+          <RepoIcon />
+          <Link className={"username"} to={"/" + username}>
+            {username}
+          </Link>
 
-        <span>/</span>
+          <span>/</span>
 
-        <Link className={reponame} to={`/${username}/${reponame}`}>
-          {reponame}
-        </Link>
-      </BreadCrumb>
+          <Link className={"reponame"} to={`/${username}/${reponame}`}>
+            {reponame}
+          </Link>
+        </BreadCrumb>
 
-      <p>{data?.repo?.description}</p>
+        <p>{data?.repo?.description}</p>
 
-      <Stats>
-        <li>
-          <StarIcon />
-          <b>{data?.repo?.stargazers_count}</b>
-          <span>stars</span>
-        </li>
-        <li>
-          <ForkIcon />
-          <b>{data?.repo?.forks_count}</b>
-          <span>forks</span>
-        </li>
-      </Stats>
+        <Stats>
+          <li>
+            <StarIcon />
+            <b>{data?.repo?.stargazers_count}</b>
+            <span>stars</span>
+          </li>
+          <li>
+            <ForkIcon />
+            <b>{data?.repo?.forks_count}</b>
+            <span>forks</span>
+          </li>
+        </Stats>
 
-      <LinkButton href={data?.repo?.html_url}>
-        <GithubIcon />
-        <span>view on github</span>
-      </LinkButton>
+        <LinkButton href={data?.repo?.html_url}>
+          <GithubIcon />
+          <span>view on github</span>
+        </LinkButton>
+      </Card>
     </Container>
   );
 };
