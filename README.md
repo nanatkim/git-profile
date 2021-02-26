@@ -2,7 +2,7 @@
 
 ### Descrição
 
-Esta aplicação consome a [API](http://localhost:3000) do Github, mostrando informações sobre usuários e repositórios de acordo com a pesquisa realizada.
+Esta aplicação consome a [API](https://docs.github.com/en/rest) do Github, mostrando informações sobre usuários e repositórios de acordo com a pesquisa realizada.
 
 Tecnologias:
 
