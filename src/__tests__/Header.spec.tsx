@@ -29,8 +29,10 @@ describe("Header", () => {
     renderWithRouter(<Header />, { route: "nanatkim" });
     const input = screen.getByLabelText("username/reponame");
 
-    fireEvent.click(screen.getByText("Git Profile"));
+    fireEvent.change(input, { target: { value: "nanatkim" } });
+    expect(hasInputValue(input, "nanatkim")).toBeTruthy();
 
+    fireEvent.click(screen.getByText("Git Profile"));
     expect(hasInputValue(input, "")).toBeTruthy();
   });
 });
