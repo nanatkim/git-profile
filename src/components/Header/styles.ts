@@ -18,11 +18,8 @@ export const GithubLogo = styled(FaGithub)`
 export const Title = styled.h1`
   font-size: 16px;
   margin-left: 10px;
-
-  > a {
-    color: var(--primary);
-    text-decoration: none;
-  }
+  color: var(--primary);
+  cursor: pointer;
 `;
 
 export const SearchForm = styled.form`

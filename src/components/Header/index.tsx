@@ -13,14 +13,20 @@ const Header: React.FC = () => {
     navigate("/" + search.toLocaleLowerCase().trim());
   }
 
+  function handleNavigate() {
+    setSearch("");
+    navigate("/");
+  }
+
   return (
     <Container>
       <GithubLogo />
-      <Title>
-        <Link to={"/"}>Git Profile</Link>
+      <Title onClick={handleNavigate}>
+        Git Profile
       </Title>
       <SearchForm onSubmit={handleSubmit}>
         <input
+          aria-label="username/reponame"
           type="text"
           placeholder="Enter username or username/repo..."
           value={search}
