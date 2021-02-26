@@ -37,6 +37,6 @@ Para fazer os testes, execute o comando:
 
 ```bash
 npm test
-#
+# ou
 yarn test
 ```
