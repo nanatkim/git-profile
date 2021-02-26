@@ -129,14 +129,3 @@ export const LinkButton = styled.a`
 export const GithubIcon = styled(FaGithub)`
   ${iconCSS}
 `;
-
-export const ErrorWrapper = styled.div`
-  display: flex;
-  justify-content: center;
-  background: #f9826c;
-  padding: 20px;
-  margin: 10rem;
-  border-radius: 5px;
-  color: #fff;
-  font-weight: bold;
-`;

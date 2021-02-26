@@ -24,3 +24,8 @@ export interface APIRepo {
   language?: string;
   description?: string;
 }
+
+export interface Error {
+  message: string;
+  status: number;
+}

@@ -60,17 +60,6 @@ export const Repos = styled.div`
   }
 `;
 
-export const ErrorWrapper = styled.div`
-  display: flex;
-  justify-content: center;
-  background: #f9826c;
-  padding: 20px;
-  margin: 10rem;
-  border-radius: 5px;
-  color: #fff;
-  font-weight: bold;
-`;
-
 export const StarIcon = styled(RiStarLine)`
   width: 16px;
   height: 16px;
@@ -114,7 +103,7 @@ export const Tab = styled.div`
     .content {
       margin: 0 auto;
     }
-    
+
     @media (min-width: 768px) {
       display: none;
     }

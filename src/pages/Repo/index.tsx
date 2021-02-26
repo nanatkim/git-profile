@@ -10,17 +10,17 @@ import {
   ForkIcon,
   GithubIcon,
   LinkButton,
-  ErrorWrapper,
 } from "./styles";
 
 import api from "../../services/api";
 
-import { APIRepo } from "../../@types";
+import { APIRepo, Error } from "../../@types";
 import Spinner from "../../components/Spinner";
+import NotFound from "../../components/NotFound";
 
 interface Data {
   repo?: APIRepo;
-  error?: string;
+  error?: Error;
 }
 
 const Repo: React.FC = () => {
@@ -31,26 +31,29 @@ const Repo: React.FC = () => {
   useEffect(() => {
     setLoading(true);
 
-    try {
-      api
-        .get<APIRepo>(`repos/${username}/${reponame}`)
-        .then(async (response) => {
-          if (response.status === 404) {
-            setData({ error: "Repo not found!" });
-            return;
-          }
+    api
+      .get<APIRepo>(`repos/${username}/${reponame}`)
+      .then(async (response) => {
+        setData({ repo: response.data });
 
-          setData({ repo: response.data });
-          setLoading(false);
-        });
-    } catch (error) {
-      setData({ error });
-      setLoading(false);
-    }
+        setLoading(false);
+      })
+      .catch((error) => {
+        if (error.response) {
+          setData({
+            error: {
+              message: error.response.data.message,
+              status: error.response.status,
+            },
+          });
+        }
+
+        setLoading(false);
+      });
   }, [reponame, username]);
 
   if (data?.error) {
-    return <ErrorWrapper>{data.error}</ErrorWrapper>;
+    return <NotFound message={data.error.message} status={data.error.status} />;
   }
 
   if (!data?.repo || loading) {

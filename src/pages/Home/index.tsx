@@ -9,21 +9,21 @@ import {
   Repos,
   StarIcon,
   Tab,
-  ErrorWrapper,
 } from "./styles";
 
 import api from "../../services/api";
 
 import ProfileData from "../../components/ProfileData";
 import RepoCard from "../../components/RepoCard";
-import { APIRepo, APIUser } from "../../@types";
+import { APIRepo, APIUser, Error } from "../../@types";
 import Spinner from "../../components/Spinner";
 import Map from "../../components/Map";
+import NotFound from "../../components/NotFound";
 
 interface Data {
   user?: APIUser;
   repos?: APIRepo[];
-  error?: string;
+  error?: Error;
 }
 
 const Home: React.FC = () => {
@@ -34,17 +34,12 @@ const Home: React.FC = () => {
   useEffect(() => {
     setLoading(true);
 
-    try {
-      Promise.all([
-        api.get<APIUser>(`users/${username}`),
-        api.get<APIRepo[]>(`users/${username}/starred`),
-      ]).then(async (responses) => {
+    Promise.all([
+      api.get<APIUser>(`users/${username}`),
+      api.get<APIRepo[]>(`users/${username}/starred`),
+    ])
+      .then(async (responses) => {
         const [userResponse, reposResponse] = responses;
-
-        if (userResponse.status === 404) {
-          setData({ error: "User not found!" });
-          return;
-        }
 
         setData({
           user: userResponse.data,
@@ -52,15 +47,23 @@ const Home: React.FC = () => {
         });
 
         setLoading(false);
+      })
+      .catch((error) => {
+        if (error.response) {
+          setData({
+            error: {
+              message: error.response.data.message,
+              status: error.response.status,
+            },
+          });
+        }
+
+        setLoading(false);
       });
-    } catch (error) {
-      setData({ error });
-      setLoading(false);
-    }
   }, [username]);
 
   if (data?.error) {
-    return <ErrorWrapper>{data.error}</ErrorWrapper>;
+    return <NotFound message={data.error.message} status={data.error.status} />;
   }
 
   if (!data?.user || !data?.repos || loading) {
