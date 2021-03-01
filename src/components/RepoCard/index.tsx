@@ -5,7 +5,8 @@ import {
   Container,
   TopSide,
   Badge,
-  LikedStarIcon,
+  StarredIcon,
+  UnstarredIcon,
   BotSide,
   RepoIcon,
   StarIcon,
@@ -64,7 +65,7 @@ const RepoCard: React.FC<Repo> = ({
   return (
     <Container liked={liked}>
       <Badge liked={liked} onClick={handleStars}>
-        <LikedStarIcon liked={liked} />
+        {liked ? <StarredIcon /> : <UnstarredIcon />}
       </Badge>
       <TopSide>
         <header>

@@ -11,8 +11,7 @@ export const Container = styled.div<LikedProps>`
   flex-direction: column;
   justify-content: space-between;
   padding: 16px;
-  border: 1px solid
-    ${({ liked }) => (liked ? "var(--liked)" : "var(--border)")};
+  border: 1px solid ${({ liked }) => (liked ? "var(--liked)" : "var(--border)")};
   border-radius: 6px;
   position: relative;
 `;
@@ -24,7 +23,7 @@ export const Badge = styled.div<LikedProps>`
   position: absolute;
   right: -10px;
   top: -6px;
-  background-color:  var(--primary);
+  background-color: var(--primary);
   border-radius: 50%;
   width: 25px;
   height: 25px;
@@ -40,13 +39,19 @@ export const Badge = styled.div<LikedProps>`
   }
 `;
 
-export const LikedStarIcon = styled(RiStarFill)<LikedProps>`
+export const StarredIcon = styled(RiStarFill)`
   width: 16px;
   height: 16px;
   flex-shrink: 0;
-  fill: ${({ liked }) => (liked ? "var(--liked)" : "var(--icon)")};
+  fill: var(--liked);
 `;
 
+export const UnstarredIcon = styled(RiStarFill)`
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+  fill: var(--icon);
+`;
 
 export const TopSide = styled.div`
   > header {
