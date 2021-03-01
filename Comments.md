@@ -2,6 +2,7 @@
 
 - [x] **Desenvolvimento mobile first:** estilizar a aplicação de forma apropriada de acordo com o tamanho da tela;
 - [x] **Header:** um header similar ao do Github, com a logo, o nome da aplicação e um campo de busca;
+- [x] **StarContext:** contexto reponsável por gerenciar a adição e remoção de estrelas adicionadas a um repositório, armazenando tais informações no localStorage;
 
 ### Homepage
 
@@ -13,7 +14,7 @@ Uma página similar à original do Github, com `nanatkim` como usuário e perfil
 
     > Alguns usuários não definiram a localização no Github, portanto, optei por esconder o mapa nesses casos.
 
-  - [x] **RepoCard:** um componente mostrando os dados de um repositório com estrela, permitindo redirecionar para a página Repo;
+  - [x] **RepoCard:** um componente mostrando os dados de um repositório com estrela, permitindo redirecionar para a página Repo e adicionar estrela a um repositório;
 
 ### Repo
 
