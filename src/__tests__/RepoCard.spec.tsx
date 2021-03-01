@@ -19,7 +19,7 @@ describe("RepoCard", () => {
   test("should render RepoCard", async () => {
     const { getByText } = renderWithRouter(
       <RepoCard
-        key={repo.id}
+        id={repo.id}
         username={repo.owner.login}
         reponame={repo.name}
         description={repo.description}
