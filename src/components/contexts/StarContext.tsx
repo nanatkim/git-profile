@@ -23,8 +23,7 @@ export const StarProvider: React.FC = ({ children }) => {
       starredArray = Object.values(JSON.parse(starredList));
 
       const repoIdx = starredArray.findIndex(
-        ({ username: userStoraged, id: idStoraged }) =>
-          username === userStoraged && id === idStoraged
+        (repo) => repo.id === id && repo.username === username
       );
 
       if (repoIdx > -1) {
@@ -51,8 +50,7 @@ export const StarProvider: React.FC = ({ children }) => {
       );
 
       const findIndexStar = starredArray.findIndex(
-        ({ id: idStoraged, username: userStoraged }) =>
-          idStoraged === id && username === userStoraged
+        (repo) => repo.id === id && repo.username === username
       );
 
       if (findIndexStar > -1) {

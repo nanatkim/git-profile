@@ -42,8 +42,7 @@ const RepoCard: React.FC<Repo> = ({
       const parsedList: InitialProps[] = Object.values(JSON.parse(starredList));
 
       const foundRepo = parsedList.find(
-        ({ id: idStoraged, username: userStoraged }) =>
-          idStoraged === id && userStoraged === username
+        (repo) => repo.id === id && repo.username === username
       );
 
       setLiked(foundRepo?.like ? true : false);

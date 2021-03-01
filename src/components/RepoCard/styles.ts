@@ -29,6 +29,7 @@ export const Badge = styled.div<LikedProps>`
   width: 25px;
   height: 25px;
   border: 1px solid ${({ liked }) => (liked ? "var(--liked)" : "var(--border)")};
+  cursor: pointer;
 
   * {
     font-size: 12px;
