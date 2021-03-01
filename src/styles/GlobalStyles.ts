@@ -39,9 +39,10 @@ export default createGlobalStyle`
     --link: #0366d6;
     --border: #e1e4e8;
     --ticker: rgba(209,213,218, .5);
+    --liked: #8257e5;
 
     --javascript: #f1e05a;
     --typescript: #2b7489;
-    --other-language: #8257e5;
+    --other-language: #ff5e6b;
   }
 `;

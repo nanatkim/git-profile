@@ -1,15 +1,51 @@
 import styled, { css } from "styled-components";
-import { RiBookMarkLine, RiStarLine } from "react-icons/ri";
+import { RiBookMarkLine, RiStarLine, RiStarFill } from "react-icons/ri";
 import { AiOutlineFork } from "react-icons/ai";
 
-export const Container = styled.div`
+interface LikedProps {
+  liked: boolean;
+}
+
+export const Container = styled.div<LikedProps>`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   padding: 16px;
-  border: 1px solid var(--border);
+  border: 1px solid
+    ${({ liked }) => (liked ? "var(--liked)" : "var(--border)")};
   border-radius: 6px;
+  position: relative;
 `;
+
+export const Badge = styled.div<LikedProps>`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  right: -10px;
+  top: -6px;
+  background-color:  var(--primary);
+  border-radius: 50%;
+  width: 25px;
+  height: 25px;
+  border: 1px solid ${({ liked }) => (liked ? "var(--liked)" : "var(--border)")};
+
+  * {
+    font-size: 12px;
+    font-weight: 600;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+`;
+
+export const LikedStarIcon = styled(RiStarFill)<LikedProps>`
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+  fill: ${({ liked }) => (liked ? "var(--liked)" : "var(--icon)")};
+`;
+
 
 export const TopSide = styled.div`
   > header {

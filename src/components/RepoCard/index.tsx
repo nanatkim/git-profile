@@ -1,8 +1,11 @@
-import React from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { StarContext, InitialProps } from "../contexts/StarContext";
 import {
   Container,
   TopSide,
+  Badge,
+  LikedStarIcon,
   BotSide,
   RepoIcon,
   StarIcon,
@@ -10,6 +13,7 @@ import {
 } from "./styles";
 
 interface Repo {
+  id: number;
   username: string;
   reponame: string;
   description?: string;
@@ -19,6 +23,7 @@ interface Repo {
 }
 
 const RepoCard: React.FC<Repo> = ({
+  id,
   username,
   reponame,
   description,
@@ -26,9 +31,42 @@ const RepoCard: React.FC<Repo> = ({
   stars,
   forks,
 }) => {
+  const { giveStar, removeStar } = useContext(StarContext);
+  const [liked, setLiked] = useState(false);
   const languageClass = language ? language.toLowerCase() : "other";
+
+  useEffect(() => {
+    const starredList = localStorage.getItem("gitProfile:starred-repos");
+
+    if (starredList) {
+      const parsedList: InitialProps[] = Object.values(JSON.parse(starredList));
+
+      const foundRepo = parsedList.find(
+        ({ id: idStoraged, username: userStoraged }) =>
+          idStoraged === id && userStoraged === username
+      );
+
+      setLiked(foundRepo?.like ? true : false);
+    } else {
+      setLiked(false);
+    }
+  }, [id, username, reponame]);
+
+  function handleStars() {
+    if (liked) {
+      setLiked(false);
+      removeStar({ id, username });
+    } else {
+      setLiked(true);
+      giveStar({ id, username });
+    }
+  }
+
   return (
-    <Container>
+    <Container liked={liked}>
+      <Badge liked={liked} onClick={handleStars}>
+        <LikedStarIcon liked={liked} />
+      </Badge>
       <TopSide>
         <header>
           <RepoIcon />

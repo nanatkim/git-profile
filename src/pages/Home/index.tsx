@@ -19,6 +19,7 @@ import { APIRepo, APIUser, Error } from "../../@types";
 import Spinner from "../../components/Spinner";
 import Map from "../../components/Map";
 import NotFound from "../../components/NotFound";
+import { StarProvider } from "../../components/contexts/StarContext";
 
 interface Data {
   user?: APIUser;
@@ -113,21 +114,24 @@ const Home: React.FC = () => {
             <span className="line" />
           </Tab>
 
-          <Repos>
-            <div>
-              {data.repos.map((item) => (
-                <RepoCard
-                  key={item.id}
-                  username={item.owner.login}
-                  reponame={item.name}
-                  description={item.description}
-                  language={item.language}
-                  stars={item.stargazers_count}
-                  forks={item.forks_count}
-                />
-              ))}
-            </div>
-          </Repos>
+          <StarProvider>
+            <Repos>
+              <div>
+                {data.repos.map((item) => (
+                  <RepoCard
+                    key={item.id}
+                    id={item.id}
+                    username={item.owner.login}
+                    reponame={item.name}
+                    description={item.description}
+                    language={item.language}
+                    stars={item.stargazers_count}
+                    forks={item.forks_count}
+                  />
+                ))}
+              </div>
+            </Repos>
+          </StarProvider>
         </RightSide>
       </Main>
     </Container>
